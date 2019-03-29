@@ -1,0 +1,15 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:mainline-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./source:/code
+      - ./.docker/delta.conf:/etc/nginx/conf.d/delta.conf
+  php:
+    build: ./.docker/php
+    volumes:
+      - ./source:/code
+  mongodb:
+    image: mvertes/alpine-mongo
